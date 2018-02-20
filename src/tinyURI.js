@@ -30,3 +30,5 @@ TinyURI.decodeQuery = function(string, escapeQuerySpace) {
       return string;
     }
 };
+
+module.exports = TinyURI;
