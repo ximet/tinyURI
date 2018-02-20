@@ -1,0 +1,35 @@
+{
+  "name": "tinyuri",
+  "version": "0.0.1",
+  "description": "tiny library for URI manipulation",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha ./tests/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ximet/tinyURI.git"
+  },
+  "keywords": [
+    "tiny",
+    "URI",
+    "URL",
+    "converter",
+    "encode",
+    "decode",
+    "query"
+  ],
+  "author": "XIMet",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ximet/tinyURI/issues"
+  },
+  "homepage": "https://github.com/ximet/tinyURI#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.0.1"
+  }
+}
