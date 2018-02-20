@@ -15,3 +15,18 @@ TinyURI.encodeQuery = (string, escapeQuerySpace) => {
 
     return escapeQuerySpace ? escaped.replace(/%20/g, '+') : escaped;
 };
+
+TinyURI.decode = decodeURIComponent;
+
+TinyURI.decodeQuery = function(string, escapeQuerySpace) {
+    string += '';
+    if (escapeQuerySpace === undefined) {
+      escapeQuerySpace = true;
+    }
+
+    try {
+      return TinyURI.decode(escapeQuerySpace ? string.replace(/\+/g, '%20') : string);
+    } catch(e) {
+      return string;
+    }
+};
