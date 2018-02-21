@@ -18,7 +18,7 @@ TinyURI.encodeQuery = (string, escapeQuerySpace) => {
 
 TinyURI.decode = decodeURIComponent;
 
-TinyURI.decodeQuery = function(string, escapeQuerySpace) {
+TinyURI.decodeQuery = (string, escapeQuerySpace) => {
     string += '';
     if (escapeQuerySpace === undefined) {
       escapeQuerySpace = true;
@@ -29,6 +29,10 @@ TinyURI.decodeQuery = function(string, escapeQuerySpace) {
     } catch(e) {
       return string;
     }
+};
+
+TinyURI.buildQueryParameter = (name, value, escapeQuerySpace) => {
+    return TinyURI.encodeQuery(name, escapeQuerySpace) + (value !== null ? '=' + TinyURI.encodeQuery(value, escapeQuerySpace) : '');
 };
 
 module.exports = TinyURI;
