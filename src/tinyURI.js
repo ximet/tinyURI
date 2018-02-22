@@ -1,4 +1,4 @@
-const { isUndefined } = require('./helper.js');
+const { isUndefined, isArray } = require('./helper.js');
 
 function TinyURI() {
 }
@@ -10,7 +10,8 @@ TinyURI.encode = (string) => {
 };
 
 TinyURI.encodeQuery = (string, escapeQuerySpace) => {
-    var escaped = TinyURI.encode(string + '');
+    const escaped = TinyURI.encode(string + '');
+
     if (isUndefined(escapeQuerySpace)) {
       escapeQuerySpace = true;
     }
@@ -35,6 +36,30 @@ TinyURI.decodeQuery = (string, escapeQuerySpace) => {
 
 TinyURI.buildQueryParameter = (name, value, escapeQuerySpace) => {
     return TinyURI.encodeQuery(name, escapeQuerySpace) + (value !== null ? '=' + TinyURI.encodeQuery(value, escapeQuerySpace) : '');
+};
+
+TinyURI.buildQuery = (data, duplicateQueryParameters, escapeQuerySpace) => {
+    let result = '';
+
+    for (let key in data) {
+        if (Object.prototype.hasOwnProperty.call(data, key) && key) {
+            if (isArray(data[key])) {
+                let unique = {};
+                for (let i = 0; i < data[key].length; i++) {
+                    if (!isUndefined(data[key][i]) && isUndefined(unique[data[key][i] + ''])) {
+                        result += '&' + TinyURI.buildQueryParameter(key, data[key][i], escapeQuerySpace);
+                        if (!duplicateQueryParameters) {
+                            unique[data[key][i] + ''] = true;
+                        }
+                    }
+                }
+            } else if (!isUndefined(data[key])) {
+                  result += '&' + TinyURI.buildQueryParameter(key, data[key], escapeQuerySpace);
+            }
+        }
+    }
+
+    return result.substring(1);
 };
 
 module.exports = TinyURI;
