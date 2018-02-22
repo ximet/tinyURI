@@ -1,3 +1,5 @@
+const { isUndefined } = require('./helper.js');
+
 function TinyURI() {
 }
 
@@ -9,7 +11,7 @@ TinyURI.encode = (string) => {
 
 TinyURI.encodeQuery = (string, escapeQuerySpace) => {
     var escaped = TinyURI.encode(string + '');
-    if (escapeQuerySpace === undefined) {
+    if (isUndefined(escapeQuerySpace)) {
       escapeQuerySpace = true;
     }
 
@@ -20,7 +22,7 @@ TinyURI.decode = decodeURIComponent;
 
 TinyURI.decodeQuery = (string, escapeQuerySpace) => {
     string += '';
-    if (escapeQuerySpace === undefined) {
+    if (isUndefined(escapeQuerySpace)) {
       escapeQuerySpace = true;
     }
 
