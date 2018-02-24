@@ -71,7 +71,7 @@ TinyURI.buildQuery = (data, duplicateQueryParameters, escapeQuerySpace) => {
 TinyURI.ensureValidHostname = (v, protocol) => {
     const hasHostname = !!v;
     const hasProtocol = !!protocol;
-    const rejectEmptyHostname = hasProtocol ? rejectEmptyHostname = arrayContains(TinyURI.HOST_PROTOCOLS, protocol) : false;
+    const rejectEmptyHostname = hasProtocol ? rejectEmptyHostname = TinyURI.HOST_PROTOCOLS.includes(protocol) : false;
 
     if (rejectEmptyHostname && !hasHostname) {
         throw new TypeError('Hostname cannot be empty, if protocol is ' + protocol);
