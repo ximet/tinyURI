@@ -4,6 +4,10 @@ function TinyURI() {
 }
 
 TinyURI.INVALID_HOSTNAME_CHARACTERS = /[^a-zA-Z0-9\.\-:_]/;
+TinyURI.HOST_PROTOCOLS = [
+  'http',
+  'https'
+];
 
 TinyURI.encode = (string) => {
     return encodeURIComponent(string)
@@ -67,7 +71,7 @@ TinyURI.buildQuery = (data, duplicateQueryParameters, escapeQuerySpace) => {
 TinyURI.ensureValidHostname = (v, protocol) => {
     const hasHostname = !!v;
     const hasProtocol = !!protocol;
-    const rejectEmptyHostname = hasProtocol ? rejectEmptyHostname = arrayContains(URI.hostProtocols, protocol) : false;
+    const rejectEmptyHostname = hasProtocol ? rejectEmptyHostname = arrayContains(TinyURI.HOST_PROTOCOLS, protocol) : false;
 
     if (rejectEmptyHostname && !hasHostname) {
         throw new TypeError('Hostname cannot be empty, if protocol is ' + protocol);
