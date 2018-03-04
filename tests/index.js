@@ -2,11 +2,24 @@ const chai = require('chai');
 const expect = chai.expect; 
 const TinyURI = require('../src/tinyURI.js');
 
+
+describe('test TinyURI', () => {
+    it('test with undefined param', () => {
+        const uri = TinyURI(undefined);
+        try { 
+            expect(uri).to.throw(TypeError);
+        }
+        catch(err) {
+            expect(err).to.eql(new Error('Property does not exist in model schema.'));
+        }
+    })
+})
+
 describe('test encode method', () => {
     it('simple encode usage', () => {
         const encodedURI = TinyURI.encode('testString');
 
-        expect(encodedURI).equal('testString');
+        expect(encodedURI).to.eql('testString');
     });
 
     it('encode string with slash', () => {
