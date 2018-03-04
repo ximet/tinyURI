@@ -1,13 +1,8 @@
-const { isUndefined, isArray, arrayContains } = require('./helper.js');
+const { isUndefined, isArray, arrayContains } = require('./checkHelper.js');
+const { INVALID_HOSTNAME_CHARACTERS, HOST_PROTOCOLS } = require('./constants.js');
 
 function TinyURI() {
 }
-
-TinyURI.INVALID_HOSTNAME_CHARACTERS = /[^a-zA-Z0-9\.\-:_]/;
-TinyURI.HOST_PROTOCOLS = [
-  'http',
-  'https'
-];
 
 TinyURI.encode = (string) => {
     return encodeURIComponent(string)
@@ -71,15 +66,12 @@ TinyURI.buildQuery = (data, duplicateQueryParameters, escapeQuerySpace) => {
 TinyURI.ensureValidHostname = (v, protocol) => {
     const hasHostname = !!v;
     const hasProtocol = !!protocol;
-    const rejectEmptyHostname = hasProtocol ? rejectEmptyHostname = TinyURI.HOST_PROTOCOLS.includes(protocol) : false;
+    const rejectEmptyHostname = hasProtocol ? rejectEmptyHostname = HOST_PROTOCOLS.includes(protocol) : false;
 
     if (rejectEmptyHostname && !hasHostname) {
         throw new TypeError('Hostname cannot be empty, if protocol is ' + protocol);
-    } else if (v && v.match(TinyURI.INVALID_HOSTNAME_CHARACTERS)) {
-        if (!punycode) {
-            throw new TypeError('Hostname "' + v + '" contains characters other than [A-Z0-9.-:_] and Punycode.js is not available');
-        }
-        if (punycode.toASCII(v).match(TinyURI.INVALID_HOSTNAME_CHARACTERS)) {
+    } else if (v && v.match(INVALID_HOSTNAME_CHARACTERS)) {
+        if (toASCII(v).match(INVALID_HOSTNAME_CHARACTERS)) {
             throw new TypeError('Hostname "' + v + '" contains characters other than [A-Z0-9.-:_]');
         }
     }
