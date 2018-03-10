@@ -2,7 +2,7 @@ const isUndefined = (value) => {
     return value === void 0;
 };
 
-const isArray = Array.isArray || (value) => {
+const isArray = Array.isArray || function(value) {
     return toString.call(value) === '[object Array]';
 };
 

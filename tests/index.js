@@ -4,14 +4,8 @@ const TinyURI = require('../src/tinyURI.js');
 
 
 describe('test TinyURI', () => {
-    it('test with undefined param', () => {
-        const uri = TinyURI(undefined);
-        try { 
-            expect(uri).to.throw(TypeError);
-        }
-        catch(err) {
-            expect(err).to.eql(new Error('Property does not exist in model schema.'));
-        }
+    it('test with string param', () => {
+        
     })
 })
 

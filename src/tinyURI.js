@@ -2,18 +2,7 @@ const { isUndefined, isArray, arrayContains } = require('./checkHelper.js');
 const { INVALID_HOSTNAME_CHARACTERS, HOST_PROTOCOLS } = require('./constants.js');
 
 function TinyURI(url, base) {
-    if (!url || url === null) {
-        throw new TypeError('undefined/null is not a valid argument for url');
-    }
     
-    if (base) {
-        return new TinyURI(url, base);
-    } 
-    else {
-        return new TinyURI(url);
-    }
-
-    return this;
 }
 
 TinyURI.encode = (string) => {
