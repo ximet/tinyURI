@@ -78,4 +78,34 @@ TinyURI.ensureValidHostname = (v, protocol) => {
     }
 };
 
+TinyURI.parseUserinfo = (string, parts) => {
+    // extract username:password
+    const firstSlash = string.indexOf('/');
+    const pos = string.lastIndexOf('@', firstSlash > -1 ? firstSlash : string.length - 1);
+    let t;
+
+    // authority@ must come before /path
+    if (pos > -1 && (firstSlash === -1 || pos < firstSlash)) {
+        t = string.substring(0, pos).split(':');
+        parts.username = t[0] ? TinyURI.decode(t[0]) : null;
+        t.shift();
+        parts.password = t[0] ? TinyURI.decode(t.join(':')) : null;
+        string = string.substring(pos + 1);
+    } else {
+        parts.username = null;
+        parts.password = null;
+    }
+
+    return string;
+};
+
+TinyURI.parseHost = (string, parts) => {
+
+}
+
+TinyURI.parseAuthority = (string, parts) => {
+    const correctString = TinyURI.parseUserinfo(string, parts);
+    return URI.parseHost(correctString, parts);
+};
+
 module.exports = TinyURI;
