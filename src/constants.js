@@ -6,3 +6,20 @@ const HOST_PROTOCOLS  = [
     'http',
     'https'
 ];
+
+const DEFAULT_PORTS = {
+    http: '80',
+    https: '443',
+    ftp: '21',
+    gopher: '70',
+    ws: '80',
+    wss: '443'
+};
+
+module.exports = {
+    REGEX_NOT_AN_ASCII,
+    REGEX_SEPARATORS,
+    INVALID_HOSTNAME_CHARACTERS,
+    HOST_PROTOCOLS,
+    DEFAULT_PORTS
+}
